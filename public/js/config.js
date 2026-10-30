@@ -3,7 +3,7 @@
 
 export const CONFIG = Object.freeze({
   /** Nomor WhatsApp restoran, format internasional tanpa "+". */
-  whatsappNumber: '628127602034',
+  whatsappNumber: '6285181471902',
 
   /** Username Instagram restoran (tanpa @). */
   instagramUsername: 'maem_eatery',
