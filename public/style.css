@@ -1,0 +1,119 @@
+/* ---------- Utilities ---------- */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #c5c5c5; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
+body.modal-open { overflow: hidden; }
+
+/* ---------- Modal ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+}
+.modal.hidden { display: none; }
+.modal-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 90vh;
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* ---------- Form ---------- */
+.field-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+}
+.field-input {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+}
+.field-input:focus { outline: none; box-shadow: 0 0 0 2px #111827; border-color: transparent; }
+
+/* Opsi pembayaran */
+.pay-option input { position: absolute; opacity: 0; pointer-events: none; }
+.pay-option span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.625rem 0.25rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.pay-option span:hover { background: #f9fafb; }
+.pay-option input:checked + span { background: #111827; border-color: #111827; color: #fff; }
+.pay-option input:focus-visible + span { box-shadow: 0 0 0 2px #6b7280; }
+
+/* Tab admin */
+.admin-tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #6b7280;
+    border-bottom: 2px solid transparent;
+}
+.admin-tab:hover { color: #111827; }
+.admin-tab.is-active { color: #111827; border-bottom-color: #111827; }
+
+/* Kartu menu habis */
+.menu-card.is-soldout img { filter: grayscale(1); opacity: 0.6; }
+
+/* Toast */
+.toast {
+    pointer-events: auto;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fff;
+    background: #111827;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.2s ease-out;
+}
+.toast.is-error { background: #b91c1c; }
+.toast.is-success { background: #15803d; }
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Scroll lebih ringan: lewati render kartu yang di luar layar. */
+.menu-card {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 320px;
+}
