@@ -99,7 +99,7 @@ export function openCheckout() {
 // ---------- Konfirmasi ----------
 
 function whatsappMessage(order) {
-  const lines = [`*HALO MAEM EATERY, SAYA MAU PESAN!* 🍽️`, '', `*ID Pesanan:* ${order.id}`, `*Nama:* ${order.customerName}`, `*No. WA:* ${order.phone}`, `*Tipe Order:* ${order.type}`];
+  const lines = [`Halo Ma’em Eatery, saya mau pesan!`, '', `*ID Pesanan:* ${order.id}`, `*Nama:* ${order.customerName}`, `*No. WA:* ${order.phone}`, `*Tipe Order:* ${order.type}`];
   lines.push(order.type === 'Takeaway' ? `*Alamat Pengiriman:* ${order.destination}` : `*Nomor Meja:* ${order.destination}`);
   lines.push(`*Pembayaran:* ${order.paymentMethod}`);
   if (order.notes) lines.push(`*Catatan:* ${order.notes}`);
@@ -114,7 +114,22 @@ function whatsappMessage(order) {
     lines.push('', `*Subtotal:* ${formatRupiah(order.subtotal)}`, `*Diskon (${order.couponCode}):* -${formatRupiah(order.discount)}`);
   }
   lines.push(`*TOTAL BAYAR: ${formatRupiah(order.total)}*`, '');
-  lines.push(order.paymentMethod === 'Cash' ? 'Mohon segera diproses ya, terima kasih!' : `Pembayaran via ${order.paymentMethod} akan saya kirimkan buktinya. Terima kasih!`);
+
+  // Info pembayaran ikut dikirim agar tetap terbaca meski pelanggan langsung menekan kirim di WhatsApp.
+  const { bank, qrisImage } = CONFIG.payment;
+  if (order.paymentMethod === 'Transfer') {
+    lines.push(
+      '*Transfer ke:*',
+      `${bank.name} - a.n. ${bank.accountHolder}`,
+      `No. Rek: ${bank.accountNumber}`,
+      '',
+      'Pembayaran via Transfer akan saya kirimkan buktinya. Terima kasih!',
+    );
+  } else if (order.paymentMethod === 'QRIS') {
+    lines.push('*Scan QRIS:*', new URL(qrisImage, window.location.origin).href, '', 'Pembayaran via QRIS akan saya kirimkan buktinya. Terima kasih!');
+  } else {
+    lines.push('Mohon segera diproses ya, terima kasih!');
+  }
   return lines.join('\n');
 }
 
