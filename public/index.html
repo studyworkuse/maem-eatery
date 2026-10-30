@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ma’em Eatery - Damar 1 (Kopi Rasa Damar) Padang.">
+    <title>Ma’em Eatery 🍽️ - Damar 1 Padang</title>
+    <link rel="icon" href="assets/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 min-w-0">
+                <img src="assets/logo.png" alt="Logo Ma’em Eatery"
+                    class="w-12 h-12 rounded-full object-cover flex-shrink-0 shadow-sm bg-white">
+                <div class="min-w-0">
+                    <h1 class="text-base sm:text-xl font-extrabold text-gray-900 tracking-tight truncate">Ma’em Eatery 🍽️</h1>
+                    <p class="text-xs text-gray-500 font-medium truncate">Damar 1 (Kopi Rasa Damar) Padang</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0 ml-2">
+                <a id="social-ig" href="https://instagram.com/maem_eatery" target="_blank" rel="noopener noreferrer" aria-label="Instagram Ma’em Eatery" title="Instagram"
+                   class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 text-white flex items-center justify-center shadow-md hover:scale-105 transition">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                </a>
+                <a id="social-wa" href="https://wa.me/628127602034" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Ma’em Eatery" title="WhatsApp"
+                   class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center shadow-md hover:scale-105 transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                </a>
+                <button id="cart-btn" type="button" aria-label="Buka keranjang menu"
+                    class="relative bg-gray-900 hover:bg-gray-800 text-white px-4 sm:px-5 py-2.5 rounded-xl transition duration-200 flex items-center shadow-md">
+                <i class="fa-solid fa-cart-shopping text-lg"></i>
+                <span class="ml-2 font-semibold hidden sm:inline">Keranjang Menu</span>
+                <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow">0</span>
+            </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Status buka/tutup: tepat di bawah header -->
+    <div id="store-bar" class="bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3">
+            <button id="store-pill" type="button" aria-label="Lihat jam operasional"
+                    class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold bg-gray-100 text-gray-500 transition">
+                <span id="store-dot" class="w-2 h-2 rounded-full bg-gray-400"></span>
+                <span id="store-pill-text">Memuat status...</span>
+            </button>
+            <span class="text-[11px] font-semibold text-gray-400 hidden sm:inline">Ketuk status untuk melihat jadwal mingguan</span>
+            <i class="fa-regular fa-clock text-gray-300 sm:hidden"></i>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+        <!-- Papan pengumuman & status tutup -->
+        <section id="notice-board" class="hidden mb-6 space-y-3" aria-live="polite">
+            <div id="closed-banner" class="hidden rounded-2xl border border-red-200 bg-red-50 text-red-800 p-4 flex gap-3">
+                <i class="fa-solid fa-store-slash mt-0.5"></i>
+                <div class="min-w-0">
+                    <p class="font-extrabold text-sm">Kami sedang tutup</p>
+                    <p id="closed-message" class="text-sm mt-0.5 whitespace-pre-line"></p>
+                    <p id="closed-next" class="text-xs font-semibold mt-1"></p>
+                </div>
+            </div>
+            <div id="announcement-board" class="hidden rounded-2xl border border-amber-200 bg-amber-50 text-amber-900 p-4 flex gap-3">
+                <i class="fa-solid fa-bullhorn mt-0.5"></i>
+                <div class="min-w-0">
+                    <p class="font-extrabold text-sm">Papan Pengumuman</p>
+                    <p id="announcement-text" class="text-sm mt-0.5 whitespace-pre-line break-words"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero -->
+        <section class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white rounded-3xl p-6 sm:p-12 mb-10 shadow-lg relative overflow-hidden">
+            <div class="max-w-2xl relative z-10">
+                <span class="bg-gray-700 text-gray-200 text-xs uppercase font-bold tracking-widest px-3 py-1 rounded-full mb-4 inline-block">Nikmati Hidangan Terbaik</span>
+                <h2 class="text-2xl sm:text-5xl font-black mb-4 leading-tight">Pusing mikirin menu untuk makan?</h2>
+                <p class="text-gray-300 text-sm sm:text-base mb-6">Di-Ma'em in Eatery aja, order langsung ke booth atau order langsung dibawah ini.</p>
+                <a href="#menu-section" class="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition shadow">
+                    Lihat Menu <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <section id="menu-section" class="scroll-mt-24">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div class="relative flex-grow max-w-md">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="search" id="search-input" placeholder="Cari menu kesukaanmu..." autocomplete="off"
+                           class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent bg-white shadow-sm text-sm">
+                </div>
+                <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar" id="category-container" role="tablist" aria-label="Kategori menu"></div>
+            </div>
+
+            <div id="menu-grid" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6"></div>
+
+            <div id="menu-loading" class="text-center py-16 text-gray-400">
+                <i class="fa-solid fa-spinner fa-spin text-3xl mb-3"></i>
+                <p class="text-sm font-semibold">Memuat menu...</p>
+            </div>
+
+            <div id="menu-error" class="hidden text-center py-16">
+                <i class="fa-solid fa-triangle-exclamation text-4xl text-amber-400 mb-3"></i>
+                <h3 class="text-lg font-bold text-gray-700">Menu belum bisa dimuat</h3>
+                <p class="text-gray-500 text-sm mt-1 mb-4">Periksa koneksi internet kamu lalu coba lagi.</p>
+                <button id="menu-retry" type="button" class="bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-800 transition">Coba Lagi</button>
+            </div>
+
+            <div id="empty-state" class="hidden text-center py-16">
+                <i class="fa-solid fa-utensils text-5xl text-gray-300 mb-4"></i>
+                <h3 class="text-lg font-bold text-gray-700">Menu Tidak Ditemukan</h3>
+                <p class="text-gray-500 text-sm mt-1">Coba kata kunci pencarian lain atau pilih kategori lain.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Jam operasional -->
+    <div id="hours-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="hours-title">
+        <div class="modal-card max-w-sm p-6">
+            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                <h3 id="hours-title" class="text-lg font-bold text-gray-900">Jam Operasional</h3>
+                <button type="button" data-close="hours-modal" aria-label="Tutup" class="text-gray-400 hover:text-gray-600 p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <p id="hours-status" class="text-sm font-bold mt-3"></p>
+            <ul id="hours-list" class="mt-3 divide-y divide-gray-100 text-sm overflow-y-auto"></ul>
+            <p class="text-xs text-gray-400 mt-3">Waktu Indonesia Barat (WIB)</p>
+        </div>
+    </div>
+
+    <!-- Detail menu -->
+    <div id="detail-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="detail-name">
+        <div class="modal-card max-w-lg p-0 overflow-hidden">
+            <div class="relative bg-gray-100 h-56 sm:h-72 flex-shrink-0" id="detail-image-wrap"></div>
+            <button type="button" data-close="detail-modal" aria-label="Tutup"
+                    class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 text-gray-700 hover:bg-white shadow flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="p-5 sm:p-6 overflow-y-auto">
+                <span id="detail-category" class="text-[10px] font-extrabold uppercase tracking-wider bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full"></span>
+                <h3 id="detail-name" class="text-xl font-extrabold text-gray-900 mt-3"></h3>
+                <p id="detail-price" class="text-lg font-black text-gray-900 mt-1"></p>
+                <p id="detail-desc" class="text-sm text-gray-600 leading-relaxed mt-3 whitespace-pre-line"></p>
+
+                <div id="detail-actions" class="mt-5 space-y-3">
+                    <label class="block text-xs font-bold text-gray-700 uppercase" for="detail-note">Catatan (opsional)</label>
+                    <textarea id="detail-note" rows="2" maxlength="150" placeholder="Contoh: pedas, tanpa bawang, es dikit..."
+                              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-gray-900 focus:outline-none"></textarea>
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden">
+                            <button type="button" id="detail-minus" class="w-10 h-10 hover:bg-gray-100 font-bold" aria-label="Kurangi">−</button>
+                            <span id="detail-qty" class="w-10 text-center font-bold text-sm">1</span>
+                            <button type="button" id="detail-plus" class="w-10 h-10 hover:bg-gray-100 font-bold" aria-label="Tambah">+</button>
+                        </div>
+                        <button type="button" id="detail-add"
+                                class="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-2.5 rounded-xl font-bold transition shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i> <span>Tambah ke Keranjang</span>
+                        </button>
+                    </div>
+                </div>
+                <p id="detail-soldout" class="hidden mt-5 text-center text-sm font-bold text-red-600 bg-red-50 rounded-xl py-3">Menu ini sedang habis</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keranjang menu -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div id="cart-backdrop" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div id="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title"
+                 class="w-screen max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col pointer-events-auto">
+                <div class="p-6 border-b border-gray-200 flex items-center justify-between bg-gray-50">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-bag-shopping text-gray-900 text-xl"></i>
+                        <h2 id="cart-title" class="text-lg font-extrabold text-gray-900">Keranjang Menu</h2>
+                    </div>
+                    <button id="close-cart" type="button" aria-label="Tutup keranjang" class="text-gray-400 hover:text-gray-600 p-2 rounded-lg hover:bg-gray-200 transition">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-6 space-y-4" id="cart-items-container"></div>
+
+                <div class="p-4 bg-gray-50 border-t border-gray-200">
+                    <div class="flex gap-2">
+                        <input type="text" id="coupon-input" placeholder="Kode Kupon" autocomplete="off" maxlength="30"
+                               class="flex-grow px-3 py-2 border border-gray-300 rounded-lg text-sm uppercase font-semibold focus:outline-none focus:ring-2 focus:ring-gray-900">
+                        <button id="apply-coupon-btn" type="button" class="bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-900 transition">Pakai</button>
+                    </div>
+                    <p id="coupon-message" class="text-xs mt-1 hidden"></p>
+                </div>
+
+                <div class="p-6 border-t border-gray-200 bg-white space-y-3">
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal" class="font-semibold text-gray-900">Rp 0</span>
+                    </div>
+                    <div id="discount-row" class="flex justify-between text-sm text-green-600 hidden">
+                        <span>Diskon Kupon</span>
+                        <span id="cart-discount" class="font-semibold">-Rp 0</span>
+                    </div>
+                    <div class="flex justify-between text-base font-extrabold text-gray-900 pt-2 border-t border-gray-100">
+                        <span>Total Keseluruhan</span>
+                        <span id="cart-total" class="text-xl text-gray-900">Rp 0</span>
+                    </div>
+                    <p id="cart-closed-note" class="hidden text-xs font-semibold text-red-700 bg-red-50 rounded-lg px-3 py-2"></p>
+                    <button id="checkout-btn" type="button" class="w-full bg-gray-900 hover:bg-gray-800 text-white py-3.5 rounded-xl font-bold transition duration-200 shadow-md flex items-center justify-center space-x-2">
+                        <span>Lanjut ke Checkout</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulir pemesanan -->
+    <div id="checkout-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+        <div class="modal-card max-w-lg p-6 sm:p-8">
+            <div class="flex justify-between items-center pb-4 border-b border-gray-100">
+                <h3 id="checkout-title" class="text-xl font-bold text-gray-900">Formulir Pemesanan</h3>
+                <button type="button" data-close="checkout-modal" aria-label="Tutup" class="text-gray-400 hover:text-gray-600 p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <form id="checkout-form" class="mt-4 space-y-4 overflow-y-auto pr-1" novalidate>
+                <div>
+                    <label class="field-label" for="cust-name">Nama Lengkap *</label>
+                    <input type="text" id="cust-name" required maxlength="80" autocomplete="name" placeholder="Contoh: Budi Santoso" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label" for="cust-phone">Nomor WhatsApp *</label>
+                    <input type="tel" id="cust-phone" required inputmode="tel" autocomplete="tel" placeholder="081234567890" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label" for="order-type">Tipe Pesanan *</label>
+                    <select id="order-type" class="field-input bg-white">
+                        <option value="Dine-in">Dine-In (Makan di Tempat)</option>
+                        <option value="Takeaway">Takeaway (Bawa Pulang / Kirim)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <span class="field-label">Metode Pembayaran *</span>
+                    <div id="payment-options" class="grid grid-cols-3 gap-2"></div>
+                    <p id="payment-hint" class="text-xs text-gray-500 mt-1.5"></p>
+                </div>
+
+                <div id="table-no-container">
+                    <label class="field-label" for="cust-table">Nomor Meja</label>
+                    <input type="text" id="cust-table" maxlength="30" placeholder="Contoh: Meja 05" class="field-input">
+                </div>
+                <div id="address-container" class="hidden">
+                    <label class="field-label" for="cust-address">Alamat Pengiriman *</label>
+                    <textarea id="cust-address" rows="3" maxlength="300" placeholder="Masukkan alamat lengkap untuk pengiriman..." class="field-input"></textarea>
+                </div>
+                <div>
+                    <label class="field-label" for="cust-notes">Catatan Tambahan (Opsional)</label>
+                    <textarea id="cust-notes" rows="2" maxlength="300" placeholder="Catatan untuk keseluruhan pesanan..." class="field-input"></textarea>
+                </div>
+
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-sm flex justify-between items-center">
+                    <span class="text-gray-600 font-semibold">Total Bayar</span>
+                    <span id="checkout-total" class="font-black text-gray-900"></span>
+                </div>
+                <p id="checkout-error" class="hidden text-sm text-red-600 bg-red-50 rounded-xl px-3 py-2" role="alert"></p>
+
+                <button type="submit" id="checkout-submit" class="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white font-bold py-3.5 rounded-xl transition duration-200 flex items-center justify-center space-x-2 shadow-lg">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Kirim Pesanan</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pesanan berhasil -->
+    <div id="success-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="success-title">
+        <div class="modal-card max-w-lg p-6 sm:p-8">
+            <div class="text-center">
+                <div class="w-14 h-14 mx-auto rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-3">
+                    <i class="fa-solid fa-check text-2xl"></i>
+                </div>
+                <h3 id="success-title" class="text-xl font-extrabold text-gray-900">Pesanan Tercatat!</h3>
+                <p class="text-sm text-gray-500 mt-1">ID pesanan: <strong id="success-id" class="text-gray-900"></strong></p>
+            </div>
+            <div id="success-body" class="mt-5 space-y-4 overflow-y-auto"></div>
+            <a id="success-wa" target="_blank" rel="noopener"
+               class="mt-5 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Konfirmasi via WhatsApp</span>
+            </a>
+            <button type="button" data-close="success-modal" class="mt-2 w-full text-sm text-gray-500 hover:text-gray-800 py-2">Tutup</button>
+        </div>
+    </div>
+
+    <!-- Admin -->
+    <div id="admin-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+        <div class="modal-card max-w-5xl p-6 sm:p-8">
+            <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <span class="bg-gray-900 text-white text-xs px-2.5 py-1 rounded font-bold">ADMIN</span>
+                    <h3 id="admin-title" class="text-lg sm:text-xl font-bold text-gray-900">Dashboard Pengelola Maem Eatery</h3>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button id="admin-logout" type="button" class="hidden text-xs text-gray-500 hover:text-gray-900 font-semibold">Keluar</button>
+                    <button type="button" data-close="admin-modal" aria-label="Tutup" class="text-gray-400 hover:text-gray-600 p-1">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Login PIN -->
+            <form id="admin-auth" class="py-12 flex flex-col items-center justify-center text-center">
+                <div class="bg-gray-100 p-4 rounded-full mb-4">
+                    <i class="fa-solid fa-lock text-3xl text-gray-700"></i>
+                </div>
+                <h4 class="text-lg font-bold text-gray-900 mb-2">Akses Terproteksi</h4>
+                <p class="text-sm text-gray-500 mb-6">Masukkan PIN keamanan admin.</p>
+                <input type="password" id="admin-pin-input" maxlength="12" placeholder="••••" autocomplete="current-password" inputmode="numeric"
+                       class="w-40 text-center text-2xl tracking-widest px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-gray-900 focus:outline-none mb-4">
+                <button id="submit-pin" type="submit" class="bg-gray-900 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-gray-800 disabled:opacity-60 transition">Masuk Admin</button>
+                <p id="pin-error" class="text-red-500 text-xs mt-2 hidden" role="alert"></p>
+            </form>
+
+            <!-- Dashboard -->
+            <div id="admin-dashboard" class="hidden flex-1 overflow-y-auto pt-4">
+                <div class="flex border-b border-gray-200 mb-6 overflow-x-auto no-scrollbar" role="tablist">
+                    <button type="button" data-admin-tab="orders" class="admin-tab">Rekapan Orderan</button>
+                    <button type="button" data-admin-tab="menu" class="admin-tab">Kelola Menu</button>
+                    <button type="button" data-admin-tab="coupons" class="admin-tab">Kode Kupon</button>
+                    <button type="button" data-admin-tab="settings" class="admin-tab">Jam &amp; Pengumuman</button>
+                </div>
+
+                <!-- Orderan -->
+                <section id="tab-orders" class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-gray-800">Daftar Transaksi Masuk</h4>
+                        <button id="clear-orders" type="button" class="text-xs text-red-600 hover:underline">Hapus Semua Riwayat</button>
+                    </div>
+                    <div class="overflow-x-auto border border-gray-200 rounded-2xl">
+                        <table class="w-full text-left text-xs sm:text-sm">
+                            <thead class="bg-gray-100 text-gray-700 uppercase font-bold border-b border-gray-200">
+                                <tr>
+                                    <th class="p-3">ID / Waktu</th>
+                                    <th class="p-3">Pelanggan</th>
+                                    <th class="p-3">Tipe / Bayar</th>
+                                    <th class="p-3">Total</th>
+                                    <th class="p-3">Status</th>
+                                    <th class="p-3 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-table-body" class="divide-y divide-gray-200"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Menu -->
+                <section id="tab-menu" class="hidden space-y-6">
+                    <form id="menu-form" class="bg-gray-50 p-4 sm:p-6 rounded-2xl border border-gray-200 space-y-4">
+                        <div class="flex items-center justify-between border-b pb-2">
+                            <h5 id="menu-form-title" class="font-bold text-gray-900 text-sm">Tambah Item Menu</h5>
+                            <button type="button" id="menu-form-cancel" class="hidden text-xs text-gray-500 hover:text-gray-900 underline">Batal edit</button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" id="menu-name" placeholder="Nama Menu" required maxlength="80" class="field-input">
+                            <input type="number" id="menu-price" placeholder="Harga (Rp)" required min="0" step="500" class="field-input">
+                            <input type="text" id="menu-category" list="menu-category-list" placeholder="Kategori (pilih / ketik baru)" required maxlength="40" class="field-input">
+                            <datalist id="menu-category-list"></datalist>
+                            <select id="menu-status" class="field-input bg-white">
+                                <option value="available">available</option>
+                                <option value="out of stock">out of stock</option>
+                            </select>
+                            <input type="url" id="menu-image" placeholder="URL Gambar (opsional)" class="field-input sm:col-span-2">
+                        </div>
+                        <textarea id="menu-desc" placeholder="Deskripsi menu (opsional)..." rows="2" maxlength="500" class="field-input"></textarea>
+                        <button type="submit" id="menu-form-submit" class="bg-gray-900 text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-gray-800 disabled:opacity-60 transition">Simpan Menu</button>
+                    </form>
+
+                    <div class="overflow-x-auto border border-gray-200 rounded-2xl">
+                        <table class="w-full text-left text-xs sm:text-sm">
+                            <thead class="bg-gray-100 text-gray-700 uppercase font-bold border-b border-gray-200">
+                                <tr>
+                                    <th class="p-3">Gambar</th>
+                                    <th class="p-3">Nama</th>
+                                    <th class="p-3">Kategori</th>
+                                    <th class="p-3">Harga</th>
+                                    <th class="p-3">Status</th>
+                                    <th class="p-3 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-menu-table-body" class="divide-y divide-gray-200"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Kupon -->
+                <section id="tab-coupons" class="hidden space-y-6">
+                    <form id="coupon-form" class="bg-gray-50 p-4 sm:p-6 rounded-2xl border border-gray-200 space-y-4">
+                        <div class="flex items-center justify-between border-b pb-2">
+                            <h5 id="coupon-form-title" class="font-bold text-gray-900 text-sm">Tambah Kode Kupon</h5>
+                            <button type="button" id="coupon-form-cancel" class="hidden text-xs text-gray-500 hover:text-gray-900 underline">Batal edit</button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <label class="block"><span class="field-label">Kode</span>
+                                <input type="text" id="coupon-code" required maxlength="30" placeholder="MAEM1111" class="field-input uppercase"></label>
+                            <label class="block"><span class="field-label">Diskon (%)</span>
+                                <input type="number" id="coupon-percent" required min="1" max="100" step="0.5" placeholder="10" class="field-input"></label>
+                            <label class="block"><span class="field-label">Minimal Belanja (Rp)</span>
+                                <input type="number" id="coupon-min" min="0" step="1000" value="0" class="field-input"></label>
+                            <label class="block"><span class="field-label">Maksimal Diskon (Rp, 0 = tanpa batas)</span>
+                                <input type="number" id="coupon-max" min="0" step="1000" value="0" class="field-input"></label>
+                            <label class="block"><span class="field-label">Expired Tanggal</span>
+                                <input type="date" id="coupon-expires" required class="field-input"></label>
+                            <label class="block"><span class="field-label">Batas Pemakaian (0 = tanpa batas)</span>
+                                <input type="number" id="coupon-limit" min="0" step="1" value="0" class="field-input"></label>
+                        </div>
+                        <button type="submit" id="coupon-form-submit" class="bg-gray-900 text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-gray-800 disabled:opacity-60 transition">Simpan Kupon</button>
+                    </form>
+
+                    <div class="overflow-x-auto border border-gray-200 rounded-2xl">
+                        <table class="w-full text-left text-xs sm:text-sm">
+                            <thead class="bg-gray-100 text-gray-700 uppercase font-bold border-b border-gray-200">
+                                <tr>
+                                    <th class="p-3">Kode</th>
+                                    <th class="p-3">Diskon</th>
+                                    <th class="p-3">Min / Maks</th>
+                                    <th class="p-3">Expired</th>
+                                    <th class="p-3">Terpakai</th>
+                                    <th class="p-3 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-coupon-table-body" class="divide-y divide-gray-200"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Jam & Pengumuman -->
+                <section id="tab-settings" class="hidden space-y-6">
+                    <form id="settings-form" class="bg-gray-50 p-4 sm:p-6 rounded-2xl border border-gray-200 space-y-6">
+                        <div class="border-b pb-2">
+                            <h5 class="font-bold text-gray-900 text-sm">Status Toko</h5>
+                            <p id="settings-live-status" class="text-sm text-gray-600 mt-1"></p>
+                        </div>
+
+                        <fieldset>
+                            <legend class="field-label">Mode</legend>
+                            <div id="mode-options" class="grid grid-cols-1 sm:grid-cols-3 gap-2"></div>
+                        </fieldset>
+
+                        <div>
+                            <span class="field-label">Jadwal Mingguan (WIB)</span>
+                            <div id="hours-editor" class="space-y-2"></div>
+                            <p class="text-xs text-gray-500 mt-2">Jika jam tutup lebih kecil dari jam buka (mis. 18:00 → 02:00), dianggap buka melewati tengah malam.</p>
+                        </div>
+
+                        <label class="block">
+                            <span class="field-label">Papan Pengumuman</span>
+                            <textarea id="settings-announcement" rows="3" maxlength="500" placeholder="Contoh: Promo Es Teh Rp5.000 sampai Jumat! (kosongkan untuk menyembunyikan)" class="field-input"></textarea>
+                        </label>
+
+                        <label class="block">
+                            <span class="field-label">Pesan Saat Tutup</span>
+                            <textarea id="settings-closed-message" rows="2" maxlength="300" placeholder="Maaf, kami sedang tutup. Silakan pesan kembali saat jam operasional." class="field-input"></textarea>
+                        </label>
+
+                        <button type="submit" id="settings-submit" class="bg-gray-900 text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-gray-800 disabled:opacity-60 transition">Simpan Pengaturan</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-[60] space-y-2 w-[90vw] max-w-sm pointer-events-none" aria-live="polite"></div>
+
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12 text-center text-sm text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <p>&copy; Maem Eatery 2026. All rights reserved.</p>
+            <span class="hidden sm:inline text-gray-300">|</span>
+            <button id="admin-link-btn" type="button" class="text-gray-600 hover:text-gray-900 font-semibold underline decoration-dotted transition">admin only</button>
+        </div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
