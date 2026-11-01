@@ -21,7 +21,7 @@ export const CONFIG = Object.freeze({
 
   /** Informasi pembayaran yang ditampilkan setelah pesanan dibuat. GANTI sesuai data asli. */
   payment: {
-    bank: { name: 'BCA', accountNumber: '5472 0100 4214 506', accountHolder: 'Haura Syifa' },
+    bank: { name: 'BRI', accountNumber: '5472 0100 4214 506', accountHolder: 'Haura Syifa' },
     /** Taruh gambar QRIS di public/assets/qris.png (atau ubah path ini). */
     qrisImage: '/assets/qris.png',
   },
